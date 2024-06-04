@@ -14,7 +14,7 @@ const Card = () => {
         <h2 className={styles.title}>Card title</h2>
         <p className={styles.hashtag}>#MyHastag</p>
       </div>
-      <p className={styles.description}>Description</p>
+      {/* <p className={styles.description}>Description</p> */}
     </div>
   );
 };
