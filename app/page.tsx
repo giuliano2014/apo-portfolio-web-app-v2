@@ -1,13 +1,14 @@
-import ThreeItemsBlock from "@/components/threeItemsBlock/threeItemsBlock";
+import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
-import Card from "@/components/ui/card/card";
 
 export default function Home() {
   return (
-    <main>
-      <Card />
+    <main className="homePage">
       <TwoItemsBlock />
-      <ThreeItemsBlock />
+      <OneItemBlock />
+      <TwoItemsBlock />
+      <TwoItemsBlock />
+      <OneItemBlock />
     </main>
   );
 }
