@@ -25,3 +25,10 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Homepage */
+.homePage {
+  div:last-child {
+    margin-bottom: 0;
+  }
+}
