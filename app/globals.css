@@ -25,16 +25,3 @@ body {
     text-wrap: balance;
   }
 }
-
-/* Homepage */
-.homePage {
-  @media (min-width: 1024px) {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  div:last-child {
-    margin-bottom: 0;
-  }
-}
