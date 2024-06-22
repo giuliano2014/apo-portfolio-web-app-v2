@@ -1,5 +1,12 @@
+import Navbar from "@/components/navbar";
+import styles from "./header.module.css";
+
 const Header = () => {
-  return <h2>Header</h2>;
-}
+  return (
+    <header className={styles.wrapper}>
+      <Navbar />
+    </header>
+  );
+};
 
 export default Header;

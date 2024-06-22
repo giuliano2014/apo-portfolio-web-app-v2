@@ -5,11 +5,11 @@ import styles from "./page.module.css";
 
 export default function Page({ params }: { params: { slug: string } }) {
   return (
-    <div className={styles.projectPage}>
+    <main className={styles.projectPage}>
       <div>My project: {params.slug}</div>
       <ThreeItemsBlock />
       <TwoItemsBlock />
       <OneItemBlock />
-    </div>
+    </main>
   );
 }
