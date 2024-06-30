@@ -11,15 +11,15 @@ const ThreeColumnsText = ({ brand, tools, year }: ThreeColumnsTextProps) => {
     <div className={styles.wrapper}>
       <div>
         <p>Marque</p>
-        <h2>Soi Paris</h2>
+        <h2>{brand}</h2>
       </div>
       <div>
         <p>Année</p>
-        <h2>2023</h2>
+        <h2>{year}</h2>
       </div>
       <div>
         <p>Outils</p>
-        <h2>PS AI ID</h2>
+        <h2>{tools}</h2>
       </div>
     </div>
   );
