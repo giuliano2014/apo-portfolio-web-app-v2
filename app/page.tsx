@@ -3,7 +3,7 @@ import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
 // lib/queries.js
-export const getHomePageData = `
+const getHomePageData = `
   query GetHomePageData {
     homepages {
       projects {
@@ -42,7 +42,7 @@ if (!endpoint) {
   throw new Error("GraphQL endpoint is not defined in environment variables.");
 }
 
-export const fetchGraphQLData = async (query: any, variables = {}) => {
+const fetchGraphQLData = async (query: any, variables = {}) => {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
