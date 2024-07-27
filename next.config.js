@@ -3,7 +3,7 @@ module.exports = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'placeholderimage.eu',
+                hostname: 'eu-central-1-shared-euc1-02.graphassets.com',
             },
         ],
     },

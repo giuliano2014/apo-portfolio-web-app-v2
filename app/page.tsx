@@ -28,7 +28,6 @@ export const fetchGraphQLData = async (query: any, variables = {}) => {
         data.errors.map((error: any) => error.message).join(", ")
       );
     }
-    console.log("GraphQL data:", data.data);
     return data.data;
   } catch (error) {
     console.error("Error fetching GraphQL data:", error);
@@ -37,19 +36,31 @@ export const fetchGraphQLData = async (query: any, variables = {}) => {
 };
 
 // lib/queries.js
-export const GET_EXAMPLE_DATA = `
-  query GetExampleData {
+export const getHomePageData = `
+  query GetHomePageData {
     homepages {
       projects {
         ... on OneProject {
           id
           title
+          hashtag
+          media {
+            url(transformation: {})
+            width
+            height
+          }
         }
         ... on TwoProject {
           id
           projects {
             id
             title
+            hashtag
+            media {
+              height
+              url(transformation: {})
+              width
+            }
           }
         }
       }
@@ -58,19 +69,42 @@ export const GET_EXAMPLE_DATA = `
 `;
 
 export default async function Home() {
-  const data = await fetchGraphQLData(GET_EXAMPLE_DATA);
-  console.log("DATA", data);
-  console.log("YEAH BABY", data.homepages[0].projects[0]);
-  const test = data.homepages[0].projects.map((project: any) => {
-    console.log("PROJECT", project);
+  const data = await fetchGraphQLData(getHomePageData);
+
+  const filteredData = data.homepages[0].projects.map((project: any) => {
+    if (project.media) {
+      return (
+        <OneItemBlock
+          key={project.id}
+          hashtag={project.hashtag}
+          height={project.media.height}
+          id={project.id}
+          title={project.title}
+          url={project.media.url}
+          width={project.media.width}
+        />
+      );
+    } else if (project.projects) {
+      const hashtags = project.projects.map((subProject: any) => subProject.hashtag);
+      const heights = project.projects.map((subProject: any) => subProject.media.height);
+      const ids = project.projects.map((subProject: any) => subProject.id);
+      const titles = project.projects.map((subProject: any) => subProject.title);
+      const urls = project.projects.map((subProject: any) => subProject.media.url);
+      const widths = project.projects.map((subProject: any) => subProject.media.width);
+      return (
+        <TwoItemsBlock
+          key={project.id}
+          hashtags={hashtags}
+          heights={heights}
+          ids={ids}
+          titles={titles}
+          urls={urls}
+          widths={widths}
+        />
+      );
+    }
+    return null;
   });
-  return (
-    <main className={styles.homePage}>
-      <TwoItemsBlock />
-      <OneItemBlock />
-      <TwoItemsBlock />
-      <TwoItemsBlock />
-      <OneItemBlock />
-    </main>
-  );
+
+  return <main className={styles.homePage}>{filteredData}</main>;
 }
