@@ -1,6 +1,7 @@
 import Card from "@/components/ui/card/card";
 import styles from "./threeItemsBlock.module.css";
 
+//@TODO: Add types
 const ThreeItemsBlock = ({
   heights,
   urls,

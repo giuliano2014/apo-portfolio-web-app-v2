@@ -1,6 +1,7 @@
 import Card from "@/components/ui/card/card";
 import styles from "./twoItemsBlock.module.css";
 
+//@TODOD: Add types
 const TwoItemsBlock = ({
   hashtags,
   heights,
@@ -18,7 +19,7 @@ const TwoItemsBlock = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      {urls.map((url, index) => (
+      {urls.map((url, index) => ( //@TODO: Improve this code
         <Card
           key={ids[index]}
           hashtag={hashtags[index]}

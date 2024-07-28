@@ -1,6 +1,7 @@
 import Card from "@/components/ui/card/card";
 import styles from "./oneItemBlock.module.css";
 
+//@TODO: Add types
 const OneItemBlock = ({
   hashtag,
   height,

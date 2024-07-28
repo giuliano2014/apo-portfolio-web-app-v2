@@ -2,6 +2,8 @@ import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
+//@TODO: Refactor this code
+
 // lib/queries.js
 const getHomePageData = `
   query GetHomePageData {
