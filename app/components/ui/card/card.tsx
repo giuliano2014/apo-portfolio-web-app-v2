@@ -5,17 +5,21 @@ import styles from "./card.module.css";
 type CardsProps = {
   children?: ReactNode;
   hashtag?: string;
+  height: number;
   isSpecial?: boolean; //@TODO: Rename this prop
   title?: string;
   url: string;
+  width: number;
 };
 
 const Card = ({
   children,
   hashtag,
+  height,
   isSpecial = false,
   title,
   url,
+  width,
 }: CardsProps) => {
   return (
     <div className={styles.wrapper}>
@@ -23,9 +27,9 @@ const Card = ({
         <Image
           alt="Picture of the author"
           className={styles.image}
-          height={400}
+          height={height}
           src={url}
-          width={300}
+          width={width}
         />
         {title && <h2 className={styles.title}>{title}</h2>}
         {hashtag && <p className={styles.hashtag}>#{hashtag}</p>}

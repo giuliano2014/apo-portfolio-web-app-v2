@@ -12,12 +12,14 @@ const TopProjectBlock = () => {
   return (
     <div className={styles.wrapper}>
       {isDesktop && (
-        <Card isSpecial={true} url="https://placeholderimage.eu/api/300/400" />
+        <Card height={200} isSpecial={true} url="https://placeholderimage.eu/api/300/400" width={300} />
       )}
       <Card
         hashtag="Direction artistique"
+        height={200}
         title="Los Angeles"
         url="https://placeholderimage.eu/api/300/400"
+        width={300}
       >
         <div className={styles.description}>
           <ThreeColumnsText brand="Soi Paris" tools="PS AI ID" year="2023" />

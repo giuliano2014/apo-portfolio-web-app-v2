@@ -1,11 +1,34 @@
 import Card from "@/components/ui/card/card";
 import styles from "./twoItemsBlock.module.css";
 
-const TwoItemsBlock = () => {
+//@TODOD: Add types
+const TwoItemsBlock = ({
+  hashtags,
+  heights,
+  ids,
+  titles,
+  urls,
+  widths,
+}: {
+  hashtags: string[];
+  heights: number[];
+  ids: string[];
+  titles: string[];
+  urls: string[];
+  widths: number[];
+}) => {
   return (
     <div className={styles.wrapper}>
-      <Card url="https://placeholderimage.eu/api/300/400" />
-      <Card url="https://placeholderimage.eu/api/300/400" />
+      {urls.map((url, index) => ( //@TODO: Improve this code
+        <Card
+          key={ids[index]}
+          hashtag={hashtags[index]}
+          height={heights[index]}
+          title={titles[index]}
+          url={url}
+          width={widths[index]}
+        />
+      ))}
     </div>
   );
 };
