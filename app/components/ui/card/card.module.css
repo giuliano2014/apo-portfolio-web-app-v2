@@ -1,4 +1,6 @@
 .wrapper {
+  width: 100%;
+
   .box {
     align-items: center;
     display: flex;
@@ -7,7 +9,13 @@
     position: relative;
     width: 100%;
 
-    & img {
+    &.specialCard {
+      height: 100%;
+    }
+
+    .image {
+      flex: 1;
+      object-fit: cover;
       width: 100%;
     }
 
@@ -36,3 +44,4 @@
     font-weight: 400;
   }
 }
+

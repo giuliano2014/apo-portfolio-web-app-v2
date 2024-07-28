@@ -1,0 +1,10 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+
+  .description {
+    padding: 10px;
+  }
+}
+
