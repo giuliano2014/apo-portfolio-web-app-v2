@@ -1,20 +1,36 @@
 import Image from "next/image";
+import { ReactNode } from "react";
 import styles from "./card.module.css";
 
-const Card = () => {
+type CardsProps = {
+  children?: ReactNode;
+  hashtag?: string;
+  isSpecial?: boolean; //@TODO: Rename this prop
+  title?: string;
+  url: string;
+};
+
+const Card = ({
+  children,
+  hashtag,
+  isSpecial = false,
+  title,
+  url,
+}: CardsProps) => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.box}>
+      <div className={`${styles.box} ${isSpecial ? styles.specialCard : ""}`}>
         <Image
           alt="Picture of the author"
+          className={styles.image}
           height={400}
-          src="https://placeholderimage.eu/api/300/400"
+          src={url}
           width={300}
         />
-        <h2 className={styles.title}>Card title</h2>
-        <p className={styles.hashtag}>#MyHastag</p>
+        {title && <h2 className={styles.title}>{title}</h2>}
+        {hashtag && <p className={styles.hashtag}>#{hashtag}</p>}
       </div>
-      {/* <p className={styles.description}>Description</p> */}
+      {children}
     </div>
   );
 };
