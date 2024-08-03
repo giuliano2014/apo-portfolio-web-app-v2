@@ -2,6 +2,42 @@ import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
+enum Hashtag {
+  Art = "Art",
+  Education = "Education",
+  Music = "Music",
+  Science = "Science",
+  Tech = "Tech",
+}
+
+type Media = {
+  height: number;
+  url: string;
+  width: number;
+};
+
+type SoloProject = {
+  hashtag: Hashtag;
+  id: string;
+  media: Media;
+  title: string;
+};
+
+type DuoProject = {
+  __typename: "DuoProject";
+  id: string;
+  firstBloc: SoloProject;
+  secondBloc: SoloProject;
+};
+
+type Project = ({ __typename: "SoloProject" } & SoloProject) | DuoProject;
+
+type HomePageData = {
+  homepages: {
+    projects: Project[];
+  }[];
+};
+
 // lib/queries.js
 const getHomePageData = `
   query GetHomePageData {
@@ -48,13 +84,16 @@ const getHomePageData = `
 `;
 
 // lib/graphql.js
-const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+const endpoint: string | undefined = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 
 if (!endpoint) {
   throw new Error("GraphQL endpoint is not defined in environment variables.");
 }
 
-const fetchGraphQLData = async (query, variables = {}) => {
+const fetchGraphQLData = async (
+  query: string,
+  variables: Record<string, any> = {}
+): Promise<HomePageData> => {
   try {
     const response = await fetch(endpoint, {
       method: "POST",
@@ -68,7 +107,7 @@ const fetchGraphQLData = async (query, variables = {}) => {
     const { data, errors } = await response.json();
 
     if (errors) {
-      throw new Error(errors.map((error) => error.message).join(", "));
+      throw new Error(errors.map((error: any) => error.message).join(", "));
     }
 
     return data;
@@ -78,7 +117,11 @@ const fetchGraphQLData = async (query, variables = {}) => {
   }
 };
 
-const ProjectRenderer = ({ project }) => {
+type ProjectRendererProps = {
+  project: Project;
+};
+
+const ProjectRenderer = ({ project }: ProjectRendererProps) => {
   const { __typename } = project;
 
   if (__typename === "SoloProject") {
@@ -112,15 +155,17 @@ const ProjectRenderer = ({ project }) => {
   );
 };
 
-export default async function Home() {
+const Home = async () => {
   const data = await fetchGraphQLData(getHomePageData);
   const projects = data.homepages[0].projects;
 
   return (
     <main className={styles.homePage}>
-      {projects.map((project) => (
+      {projects.map((project: Project) => (
         <ProjectRenderer key={project.id} project={project} />
       ))}
     </main>
   );
-}
+};
+
+export default Home;
