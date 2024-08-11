@@ -1,7 +1,5 @@
-// import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
-// import ThreeItemsBlock from "@/components/threeItemsBlock/threeItemsBlock";
+import DuoBloc from "@/components/duoBloc/duoBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
-// import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
 // lib/queries.js
@@ -10,7 +8,9 @@ const getProjectById = `
     project(where: {id: $id}) {
       content {
         ... on DuoBloc {
+          __typename
           firstColumn {
+            id
             media {
               height
               url
@@ -19,6 +19,7 @@ const getProjectById = `
             text
           }
           secondColumn {
+            id
             text
             media {
               height
@@ -28,6 +29,7 @@ const getProjectById = `
           }
         }
         ... on SoloBloc {
+          __typename
           text
           media {
             height
@@ -36,11 +38,13 @@ const getProjectById = `
           }
         }
         ... on TextBloc {
+          __typename
           text
           surtitle
           title
         }
         ... on TrioBloc {
+          __typename
           firstColumn {
             media {
               height
@@ -128,22 +132,69 @@ const fetchGraphQLData = async (
   }
 };
 
-const Page = async({ params }: { params: { slug: string } }) => {
+const SoloBloc = ({ text, media }: any) => (
+  <div>
+    <p>{text}</p>
+    <img src={media.url} alt="Solo Bloc Media" />
+  </div>
+);
+
+const TextBloc = ({ text, surtitle, title }: any) => (
+  <div>
+    <h3>{surtitle}</h3>
+    <h2>{title}</h2>
+    <p>{text}</p>
+  </div>
+);
+
+const TrioBloc = ({ firstColumn, secondColumn, thirdColumn }: any) => (
+  <div>
+    <div>
+      <img src={firstColumn.media.url} alt="First Column Media" />
+      <p>{firstColumn.text}</p>
+    </div>
+    <div>
+      <p>{secondColumn.text}</p>
+      <img src={secondColumn.media.url} alt="Second Column Media" />
+    </div>
+    <div>
+      <p>{thirdColumn.text}</p>
+      <img src={thirdColumn.media.url} alt="Third Column Media" />
+    </div>
+  </div>
+);
+
+const Page = async ({ params }: { params: { slug: string } }) => {
   const projectId = params.slug;
   const data = await fetchGraphQLData(getProjectById, { id: projectId });
-  console.log('SINGLE PROJECT', data.project);
 
-  // Extraire les données de l'en-tête
   const headerData = data.project.header;
+  const contentData = data.project.content;
+
+  console.log(contentData);
 
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
-      {/* <ThreeItemsBlock />
+      {/* <OneItemBlock />
       <TwoItemsBlock />
-      <OneItemBlock /> */}
+      <ThreeItemsBlock /> */}
+      {contentData.map((bloc: any, index: number) => {
+        switch (bloc.__typename) {
+          case "DuoBloc":
+            return <DuoBloc key={index} {...bloc} />;
+          // case 'SoloBloc':
+          //   return <SoloBloc key={index} {...bloc} />;
+          // case 'TextBloc':
+          //   return <TextBloc key={index} {...bloc} />;
+          // case 'TrioBloc':
+          //   return <TrioBloc key={index} {...bloc} />;
+          default:
+            return null;
+        }
+      })}
     </main>
   );
-}
+};
 
 export default Page;
