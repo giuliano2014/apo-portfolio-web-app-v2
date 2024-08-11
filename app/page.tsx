@@ -1,4 +1,4 @@
-import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
+import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
@@ -128,7 +128,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
     const { hashtag, id, media, title } = project;
 
     return (
-      <OneItemBlock
+      <OneItemBloc
         key={id}
         hashtag={hashtag}
         height={media.height}

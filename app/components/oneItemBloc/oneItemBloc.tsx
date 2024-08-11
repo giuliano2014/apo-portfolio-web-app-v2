@@ -1,19 +1,21 @@
 import Card from "@/components/ui/card/card";
-import styles from "./oneItemBlock.module.css";
+import styles from "./oneItemBloc.module.css";
 
 //@TODO: Add types
-const OneItemBlock = ({
+const OneItemBloc = ({
+  children,
   hashtag,
   height,
   id,
   title,
   url,
-  width
+  width,
 }: {
-  hashtag: string;
+  children?: any;
+  hashtag?: string;
   height: number;
   id: string;
-  title: string;
+  title?: string;
   url: string;
   width: number;
 }) => {
@@ -26,9 +28,11 @@ const OneItemBlock = ({
         title={title}
         url={url}
         width={width}
-      />
+      >
+        {children}
+      </Card>
     </div>
   );
 };
 
-export default OneItemBlock;
+export default OneItemBloc;

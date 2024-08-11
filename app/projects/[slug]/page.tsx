@@ -1,4 +1,5 @@
 import DuoBloc from "@/components/duoBloc/duoBloc";
+import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import styles from "./page.module.css";
 
@@ -30,6 +31,7 @@ const getProjectById = `
         }
         ... on SoloBloc {
           __typename
+          id
           text
           media {
             height
@@ -132,13 +134,6 @@ const fetchGraphQLData = async (
   }
 };
 
-const SoloBloc = ({ text, media }: any) => (
-  <div>
-    <p>{text}</p>
-    <img src={media.url} alt="Solo Bloc Media" />
-  </div>
-);
-
 const TextBloc = ({ text, surtitle, title }: any) => (
   <div>
     <h3>{surtitle}</h3>
@@ -176,15 +171,25 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
-      {/* <OneItemBlock />
+      {/* <OneItemBloc />
       <TwoItemsBlock />
       <ThreeItemsBlock /> */}
       {contentData.map((bloc: any, index: number) => {
         switch (bloc.__typename) {
           case "DuoBloc":
             return <DuoBloc key={index} {...bloc} />;
-          // case 'SoloBloc':
-          //   return <SoloBloc key={index} {...bloc} />;
+          case "SoloBloc":
+            return (
+              <OneItemBloc
+                key={bloc.id}
+                id={bloc.id}
+                height={bloc.media.height}
+                url={bloc.media.url}
+                width={bloc.media.width}
+              >
+                <p>{bloc.text}</p>
+              </OneItemBloc>
+            );
           // case 'TextBloc':
           //   return <TextBloc key={index} {...bloc} />;
           // case 'TrioBloc':
