@@ -1,6 +1,7 @@
 import DuoBloc from "@/components/duoBloc/duoBloc";
 import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
+import TrioBloc from "@/components/trioBloc/trioBloc";
 import styles from "./page.module.css";
 
 // lib/queries.js
@@ -47,6 +48,7 @@ const getProjectById = `
         }
         ... on TrioBloc {
           __typename
+          id
           firstColumn {
             media {
               height
@@ -63,7 +65,7 @@ const getProjectById = `
               width
             }
           }
-          thirdColmn {
+          thirdColumn {
             text
             media {
               height
@@ -142,23 +144,6 @@ const TextBloc = ({ text, surtitle, title }: any) => (
   </div>
 );
 
-const TrioBloc = ({ firstColumn, secondColumn, thirdColumn }: any) => (
-  <div>
-    <div>
-      <img src={firstColumn.media.url} alt="First Column Media" />
-      <p>{firstColumn.text}</p>
-    </div>
-    <div>
-      <p>{secondColumn.text}</p>
-      <img src={secondColumn.media.url} alt="Second Column Media" />
-    </div>
-    <div>
-      <p>{thirdColumn.text}</p>
-      <img src={thirdColumn.media.url} alt="Third Column Media" />
-    </div>
-  </div>
-);
-
 const Page = async ({ params }: { params: { slug: string } }) => {
   const projectId = params.slug;
   const data = await fetchGraphQLData(getProjectById, { id: projectId });
@@ -173,7 +158,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
       <TopProjectBlock {...headerData} />
       {/* <OneItemBloc />
       <TwoItemsBlock />
-      <ThreeItemsBlock /> */}
+      <TrioBloc /> */}
       {contentData.map((bloc: any, index: number) => {
         switch (bloc.__typename) {
           case "DuoBloc":
@@ -192,8 +177,9 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             );
           // case 'TextBloc':
           //   return <TextBloc key={index} {...bloc} />;
-          // case 'TrioBloc':
-          //   return <TrioBloc key={index} {...bloc} />;
+          case "TrioBloc":
+            return <TrioBloc key={bloc.id} {...bloc} />;
+          // return <TrioBloc key={index} {...bloc} />;
           default:
             return null;
         }
