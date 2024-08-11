@@ -90,6 +90,7 @@ if (!endpoint) {
   throw new Error("GraphQL endpoint is not defined in environment variables.");
 }
 
+// @TODO: Move this function to a shared file
 const fetchGraphQLData = async (
   query: string,
   variables: Record<string, any> = {}

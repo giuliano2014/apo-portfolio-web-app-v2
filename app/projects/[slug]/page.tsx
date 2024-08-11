@@ -115,6 +115,7 @@ if (!endpoint) {
   throw new Error("GraphQL endpoint is not defined in environment variables.");
 }
 
+// @TODO: Move this function to a shared file
 const fetchGraphQLData = async (
   query: string,
   variables: Record<string, any> = {}
@@ -148,12 +149,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   const headerData = project.header;
   const contentData = project.content;
 
-  console.log(headerData);
-
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
-      {contentData.map((bloc: any) => {
+      {contentData.map((bloc: any) => { // @TODO: Improve this part of code
         switch (bloc.__typename) {
           case "DuoBloc":
             return <DuoBloc key={bloc.id} {...bloc} />;
