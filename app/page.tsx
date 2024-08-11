@@ -1,4 +1,4 @@
-import OneItemBlock from "@/components/oneItemBlock/oneItemBlock";
+import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import styles from "./page.module.css";
 
@@ -90,6 +90,7 @@ if (!endpoint) {
   throw new Error("GraphQL endpoint is not defined in environment variables.");
 }
 
+// @TODO: Move this function to a shared file
 const fetchGraphQLData = async (
   query: string,
   variables: Record<string, any> = {}
@@ -128,7 +129,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
     const { hashtag, id, media, title } = project;
 
     return (
-      <OneItemBlock
+      <OneItemBloc
         key={id}
         hashtag={hashtag}
         height={media.height}

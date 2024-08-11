@@ -6,26 +6,57 @@ import ThreeColumnsText from "@/components/ui/threeColumnsText/ThreeColumnsText"
 import useIsDesktop from "@/hooks/useIsDesktop";
 import styles from "./topProjectBlock.module.css";
 
-const TopProjectBlock = () => {
+const TopProjectBlock = ({
+  brand,
+  description,
+  hastag,
+  leftMedia,
+  mobileMedia,
+  rightMedia,
+  title,
+  tools,
+  year,
+}: any) => {
   const isDesktop = useIsDesktop();
+
+  const renderDescription = (
+    <div className={styles.description}>
+      <ThreeColumnsText brand={brand} tools={tools} year={year} />
+      <DescriptionBlock description={description} />
+    </div>
+  );
 
   return (
     <div className={styles.wrapper}>
-      {isDesktop && (
-        <Card height={200} isSpecial={true} url="https://placeholderimage.eu/api/300/400" width={300} />
+      {isDesktop ? (
+        <>
+          <Card
+            height={leftMedia.height}
+            isSpecial={true}
+            url={leftMedia.url}
+            width={leftMedia.width}
+          />
+          <Card
+            hashtag={hastag}
+            height={rightMedia.height}
+            title={title}
+            url={rightMedia.url}
+            width={rightMedia.width}
+          >
+            {renderDescription}
+          </Card>
+        </>
+      ) : (
+        <Card
+          hashtag={hastag}
+          height={mobileMedia.height}
+          title={title}
+          url={mobileMedia.url}
+          width={mobileMedia.width}
+        >
+          {renderDescription}
+        </Card>
       )}
-      <Card
-        hashtag="Direction artistique"
-        height={200}
-        title="Los Angeles"
-        url="https://placeholderimage.eu/api/300/400"
-        width={300}
-      >
-        <div className={styles.description}>
-          <ThreeColumnsText brand="Soi Paris" tools="PS AI ID" year="2023" />
-          <DescriptionBlock description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique." />
-        </div>
-      </Card>
     </div>
   );
 };

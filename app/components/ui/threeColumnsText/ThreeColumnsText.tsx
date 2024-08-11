@@ -2,11 +2,13 @@ import styles from "./threeColumnsText.module.css";
 
 type ThreeColumnsTextProps = {
   brand: string;
-  tools: string;
+  tools: string[];
   year: string;
 };
 
 const ThreeColumnsText = ({ brand, tools, year }: ThreeColumnsTextProps) => {
+  const formattedTools = tools.map(tool => `${tool}. `).join('');
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -19,7 +21,7 @@ const ThreeColumnsText = ({ brand, tools, year }: ThreeColumnsTextProps) => {
       </div>
       <div>
         <p>Outils</p>
-        <h2>{tools}</h2>
+        <h2>{formattedTools}</h2>
       </div>
     </div>
   );
