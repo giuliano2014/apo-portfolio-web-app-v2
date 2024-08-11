@@ -148,6 +148,8 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   const headerData = project.header;
   const contentData = project.content;
 
+  console.log(headerData);
+
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
