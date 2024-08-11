@@ -6,28 +6,68 @@ import ThreeColumnsText from "@/components/ui/threeColumnsText/ThreeColumnsText"
 import useIsDesktop from "@/hooks/useIsDesktop";
 import styles from "./topProjectBlock.module.css";
 
-const TopProjectBlock = () => {
+const TopProjectBlock = ({
+  brand,
+  description,
+  hastag,
+  leftMedia,
+  mobileMedia, // @TODO: Add mobileMedia to the render
+  rightMedia,
+  title,
+  tools,
+  year,
+}: any) => {
   const isDesktop = useIsDesktop();
 
   return (
     <div className={styles.wrapper}>
       {isDesktop && (
-        <Card height={200} isSpecial={true} url="https://placeholderimage.eu/api/300/400" width={300} />
+        <Card
+          height={leftMedia.height}
+          isSpecial={true}
+          url={leftMedia.url}
+          width={leftMedia.width}
+        />
       )}
       <Card
-        hashtag="Direction artistique"
-        height={200}
-        title="Los Angeles"
-        url="https://placeholderimage.eu/api/300/400"
-        width={300}
+        hashtag={hastag}
+        height={rightMedia.height}
+        title={title}
+        url={rightMedia.url}
+        width={rightMedia.width}
       >
         <div className={styles.description}>
-          <ThreeColumnsText brand="Soi Paris" tools="PS AI ID" year="2023" />
-          <DescriptionBlock description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique." />
+          <ThreeColumnsText brand={brand} tools={tools} year={year} />
+          <DescriptionBlock description={description} />
         </div>
       </Card>
     </div>
   );
 };
+
+// const TopProjectBlock = ({
+//   brand,
+//   description,
+//   hastag,
+//   title,
+//   tools,
+//   year,
+//   leftMedia,
+//   mobileMedia,
+//   rightMedia,
+// }: any) => {
+//   return (
+//     <div>
+//       <h1>{title}</h1>
+//       <p>{description}</p>
+//       <p>{brand}</p>
+//       <p>{year}</p>
+//       {/* Ajouter ici les autres éléments comme tools, hastag, médias, etc. */}
+//       {leftMedia && <img src={leftMedia.url} alt="Left media" />}
+//       {mobileMedia && <img src={mobileMedia.url} alt="Mobile media" />}
+//       {rightMedia && <img src={rightMedia.url} alt="Right media" />}
+//     </div>
+//   );
+// };
 
 export default TopProjectBlock;
