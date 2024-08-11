@@ -45,29 +45,4 @@ const TopProjectBlock = ({
   );
 };
 
-// const TopProjectBlock = ({
-//   brand,
-//   description,
-//   hastag,
-//   title,
-//   tools,
-//   year,
-//   leftMedia,
-//   mobileMedia,
-//   rightMedia,
-// }: any) => {
-//   return (
-//     <div>
-//       <h1>{title}</h1>
-//       <p>{description}</p>
-//       <p>{brand}</p>
-//       <p>{year}</p>
-//       {/* Ajouter ici les autres éléments comme tools, hastag, médias, etc. */}
-//       {leftMedia && <img src={leftMedia.url} alt="Left media" />}
-//       {mobileMedia && <img src={mobileMedia.url} alt="Mobile media" />}
-//       {rightMedia && <img src={rightMedia.url} alt="Right media" />}
-//     </div>
-//   );
-// };
-
 export default TopProjectBlock;

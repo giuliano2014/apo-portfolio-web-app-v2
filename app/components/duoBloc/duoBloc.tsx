@@ -20,7 +20,6 @@ const duoBloc = ({
       >
         <p>{firstColumn.text}</p>
       </Card>
-
       <Card
         key={secondColumn.id}
         height={secondColumn.media.height}

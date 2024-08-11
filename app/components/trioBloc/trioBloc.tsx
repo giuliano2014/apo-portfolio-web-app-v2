@@ -14,6 +14,7 @@ const TrioBloc = ({
   return (
     <div className={styles.wrapper}>
       <Card
+        key={firstColumn.id}
         height={firstColumn.media.height}
         url={firstColumn.media.url}
         width={firstColumn.media.width}
@@ -21,6 +22,7 @@ const TrioBloc = ({
         <p>{firstColumn.text}</p>
       </Card>
       <Card
+        key={secondColumn.id}
         height={secondColumn.media.height}
         url={secondColumn.media.url}
         width={secondColumn.media.width}
@@ -28,6 +30,7 @@ const TrioBloc = ({
         <p>{secondColumn.text}</p>
       </Card>
       <Card
+        key={thirdColumn.id}
         height={thirdColumn.media.height}
         url={thirdColumn.media.url}
         width={thirdColumn.media.width}

@@ -2,6 +2,7 @@ import DuoBloc from "@/components/duoBloc/duoBloc";
 import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
+import TextBloc from "@/components/ui/textBloc/TextBloc";
 import styles from "./page.module.css";
 
 // lib/queries.js
@@ -11,6 +12,7 @@ const getProjectById = `
       content {
         ... on DuoBloc {
           __typename
+          id
           firstColumn {
             id
             media {
@@ -42,6 +44,7 @@ const getProjectById = `
         }
         ... on TextBloc {
           __typename
+          id
           text
           surtitle
           title
@@ -50,6 +53,7 @@ const getProjectById = `
           __typename
           id
           firstColumn {
+            id
             media {
               height
               url
@@ -58,6 +62,7 @@ const getProjectById = `
             text
           }
           secondColumn {
+            id
             text
             media {
               height
@@ -66,6 +71,7 @@ const getProjectById = `
             }
           }
           thirdColumn {
+            id
             text
             media {
               height
@@ -136,33 +142,19 @@ const fetchGraphQLData = async (
   }
 };
 
-const TextBloc = ({ text, surtitle, title }: any) => (
-  <div>
-    <h3>{surtitle}</h3>
-    <h2>{title}</h2>
-    <p>{text}</p>
-  </div>
-);
-
 const Page = async ({ params }: { params: { slug: string } }) => {
   const projectId = params.slug;
-  const data = await fetchGraphQLData(getProjectById, { id: projectId });
-
-  const headerData = data.project.header;
-  const contentData = data.project.content;
-
-  console.log(contentData);
+  const { project } = await fetchGraphQLData(getProjectById, { id: projectId });
+  const headerData = project.header;
+  const contentData = project.content;
 
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
-      {/* <OneItemBloc />
-      <TwoItemsBlock />
-      <TrioBloc /> */}
-      {contentData.map((bloc: any, index: number) => {
+      {contentData.map((bloc: any) => {
         switch (bloc.__typename) {
           case "DuoBloc":
-            return <DuoBloc key={index} {...bloc} />;
+            return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
             return (
               <OneItemBloc
@@ -175,11 +167,10 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 <p>{bloc.text}</p>
               </OneItemBloc>
             );
-          // case 'TextBloc':
-          //   return <TextBloc key={index} {...bloc} />;
+          case "TextBloc":
+            return <TextBloc key={bloc.id} {...bloc} />;
           case "TrioBloc":
             return <TrioBloc key={bloc.id} {...bloc} />;
-          // return <TrioBloc key={index} {...bloc} />;
           default:
             return null;
         }
