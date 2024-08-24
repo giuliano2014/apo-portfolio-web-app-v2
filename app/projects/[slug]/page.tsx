@@ -149,8 +149,10 @@ const fetchGraphQLData = async (
 };
 
 const Page = async ({ params }: { params: { slug: string } }) => {
+  console.log(params.slug);
   const projectId = params.slug;
   const { project } = await fetchGraphQLData(getProjectById, { id: projectId });
+  console.log(project);
   const headerData = project.header;
   const contentData = project.content;
 

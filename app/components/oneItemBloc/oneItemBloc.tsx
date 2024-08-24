@@ -3,6 +3,7 @@
 import Card from "@/components/ui/card/card";
 import useIsDesktop from "@/hooks/useIsDesktop";
 import styles from "./oneItemBloc.module.css";
+import Link from "next/link";
 
 //@TODO: Add types
 const OneItemBloc = ({
@@ -14,6 +15,7 @@ const OneItemBloc = ({
   mobileMediaUrl,
   title,
   width,
+  slug,
 }: {
   children?: any;
   desktopMediaUrl: string;
@@ -23,22 +25,25 @@ const OneItemBloc = ({
   mobileMediaUrl?: string;
   title?: string;
   width: number;
+  slug: string;
 }) => {
   const isDesktop = useIsDesktop();
   const url = isDesktop ? desktopMediaUrl : mobileMediaUrl ?? desktopMediaUrl;
 
   return (
     <div className={styles.wrapper}>
-      <Card
-        key={id}
-        hashtag={hashtag}
-        height={height}
-        title={title}
-        url={url}
-        width={width}
-      >
-        {children}
-      </Card>
+      <Link href={`/projects/${slug}`}>
+          <Card
+            key={id}
+            hashtag={hashtag}
+            height={height}
+            title={title}
+            url={url}
+            width={width}
+          >
+            {children}
+          </Card>
+      </Link>
     </div>
   );
 };

@@ -21,6 +21,7 @@ type SoloProject = {
   id: string;
   media: Media;
   title: string;
+  slug: string;
 };
 
 type DuoProject = {
@@ -52,6 +53,7 @@ const getHomePageData = `
             url(transformation: {})
             width
           }
+          slug
           title
         }
         ... on DuoProject {
@@ -65,6 +67,7 @@ const getHomePageData = `
               url(transformation: {})
               width
             }
+            slug
             title
           }
           secondBloc {
@@ -75,6 +78,7 @@ const getHomePageData = `
               url(transformation: {})
               width
             }
+            slug
             title
           }
         }
@@ -126,7 +130,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
   const { __typename } = project;
 
   if (__typename === "SoloProject") {
-    const { hashtag, id, media, title } = project;
+    const { hashtag, id, media, title, slug } = project;
 
     return (
       <OneItemBloc
@@ -137,6 +141,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
         id={id}
         title={title}
         width={media.width}
+        slug={slug}
       />
     );
   }
@@ -152,6 +157,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
       titles={[firstBloc.title, secondBloc.title]}
       urls={[firstBloc.media.url, secondBloc.media.url]}
       widths={[firstBloc.media.width, secondBloc.media.width]}
+      slugs={[firstBloc.slug, secondBloc.slug]}
     />
   );
 };
