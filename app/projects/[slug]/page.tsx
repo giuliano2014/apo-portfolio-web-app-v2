@@ -36,7 +36,12 @@ const getProjectById = `
           __typename
           id
           text
-          media {
+          desktopMedia {
+            height
+            url
+            width
+          }
+          mobileMedia {
             height
             url
             width
@@ -152,7 +157,8 @@ const Page = async ({ params }: { params: { slug: string } }) => {
   return (
     <main className={styles.projectPage}>
       <TopProjectBlock {...headerData} />
-      {contentData.map((bloc: any) => { // @TODO: Improve this part of code
+      {contentData.map((bloc: any) => {
+        // @TODO: Improve this part of code
         switch (bloc.__typename) {
           case "DuoBloc":
             return <DuoBloc key={bloc.id} {...bloc} />;
@@ -160,10 +166,11 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             return (
               <OneItemBloc
                 key={bloc.id}
+                desktopMediaUrl={bloc.desktopMedia.url}
                 id={bloc.id}
-                height={bloc.media.height}
-                url={bloc.media.url}
-                width={bloc.media.width}
+                height={bloc.desktopMedia.height}
+                mobileMediaUrl={bloc.mobileMedia?.url}
+                width={bloc.desktopMedia.width}
               >
                 <p>{bloc.text}</p>
               </OneItemBloc>

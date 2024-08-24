@@ -131,11 +131,11 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
     return (
       <OneItemBloc
         key={id}
+        desktopMediaUrl={media.url}
         hashtag={hashtag}
         height={media.height}
         id={id}
         title={title}
-        url={media.url}
         width={media.width}
       />
     );
