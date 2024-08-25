@@ -13,9 +13,9 @@ const OneItemBloc = ({
   height,
   id,
   mobileMediaUrl,
+  slug,
   title,
   width,
-  slug,
 }: {
   children?: any;
   desktopMediaUrl: string;
@@ -23,9 +23,9 @@ const OneItemBloc = ({
   height: number;
   id: string;
   mobileMediaUrl?: string;
+  slug: string;
   title?: string;
   width: number;
-  slug: string;
 }) => {
   const isDesktop = useIsDesktop();
   const url = isDesktop ? desktopMediaUrl : mobileMediaUrl ?? desktopMediaUrl;

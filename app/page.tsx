@@ -20,8 +20,8 @@ type SoloProject = {
   hashtag: Hashtag;
   id: string;
   media: Media;
-  title: string;
   slug: string;
+  title: string;
 };
 
 type DuoProject = {
@@ -139,9 +139,9 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
         hashtag={hashtag}
         height={media.height}
         id={id}
+        slug={slug}
         title={title}
         width={media.width}
-        slug={slug}
       />
     );
   }
@@ -154,10 +154,10 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
       hashtags={[firstBloc.hashtag, secondBloc.hashtag]}
       heights={[firstBloc.media.height, secondBloc.media.height]}
       ids={[firstBloc.id, secondBloc.id]}
+      slugs={[firstBloc.slug, secondBloc.slug]}
       titles={[firstBloc.title, secondBloc.title]}
       urls={[firstBloc.media.url, secondBloc.media.url]}
       widths={[firstBloc.media.width, secondBloc.media.width]}
-      slugs={[firstBloc.slug, secondBloc.slug]}
     />
   );
 };

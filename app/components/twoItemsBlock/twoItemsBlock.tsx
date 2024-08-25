@@ -7,18 +7,18 @@ const TwoItemsBlock = ({
   hashtags,
   heights,
   ids,
+  slugs,
   titles,
   urls,
   widths,
-  slugs,
 }: {
   hashtags: string[];
   heights: number[];
   ids: string[];
+  slugs: string[];
   titles: string[];
   urls: string[];
   widths: number[];
-  slugs: string[];
 }) => {
   return (
     <div className={styles.wrapper}>

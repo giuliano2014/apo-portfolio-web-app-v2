@@ -7,8 +7,9 @@ import styles from "./page.module.css";
 
 // lib/queries.js
 const getProjectById = `
-  query GetProjectByID($id: ID!) {
-    project(where: {id: $id}) {
+  query GetProjectByID($slug: String!) {
+    projects(where: {slug: $slug}) {
+      slug
       content {
         ... on DuoBloc {
           __typename
@@ -149,12 +150,11 @@ const fetchGraphQLData = async (
 };
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  console.log(params.slug);
+  console.log('WTHEDUCK!!!', params.slug);
   const projectId = params.slug;
-  const { project } = await fetchGraphQLData(getProjectById, { id: projectId });
-  console.log(project);
-  const headerData = project.header;
-  const contentData = project.content;
+  const { projects } = await fetchGraphQLData(getProjectById, { slug: projectId });
+  const headerData = projects[0].header;
+  const contentData = projects[0].content;
 
   return (
     <main className={styles.projectPage}>
@@ -173,6 +173,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 height={bloc.desktopMedia.height}
                 mobileMediaUrl={bloc.mobileMedia?.url}
                 width={bloc.desktopMedia.width}
+                slug={projectId}
               >
                 <p>{bloc.text}</p>
               </OneItemBloc>
