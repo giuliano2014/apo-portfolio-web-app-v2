@@ -2,18 +2,16 @@
 
 import Card from "@/components/ui/card/card";
 import useIsDesktop from "@/hooks/useIsDesktop";
-import styles from "./oneItemBloc.module.css";
-import Link from "next/link";
+import styles from "./soloBloc.module.css";
 
 //@TODO: Add types
-const OneItemBloc = ({
+const SoloBloc = ({
   children,
   desktopMediaUrl,
   hashtag,
   height,
   id,
   mobileMediaUrl,
-  slug,
   title,
   width,
 }: {
@@ -23,7 +21,6 @@ const OneItemBloc = ({
   height: number;
   id: string;
   mobileMediaUrl?: string;
-  slug: string;
   title?: string;
   width: number;
 }) => {
@@ -32,20 +29,18 @@ const OneItemBloc = ({
 
   return (
     <div className={styles.wrapper}>
-      <Link href={`/projects/${slug}`}>
-          <Card
-            key={id}
-            hashtag={hashtag}
-            height={height}
-            title={title}
-            url={url}
-            width={width}
-          >
-            {children}
-          </Card>
-      </Link>
+      <Card
+        key={id}
+        hashtag={hashtag}
+        height={height}
+        title={title}
+        url={url}
+        width={width}
+      >
+        {children}
+      </Card>
     </div>
   );
 };
 
-export default OneItemBloc;
+export default SoloBloc;

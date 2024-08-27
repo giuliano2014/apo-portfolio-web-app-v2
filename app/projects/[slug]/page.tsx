@@ -1,5 +1,5 @@
 import DuoBloc from "@/components/duoBloc/duoBloc";
-import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
+import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
@@ -7,8 +7,8 @@ import styles from "./page.module.css";
 
 // lib/queries.js
 const getProjectById = `
-  query GetProjectByID($id: ID!) {
-    project(where: {id: $id}) {
+  query GetProjectByID($slug: String!) {
+    projects(where: {slug: $slug}) {
       content {
         ... on DuoBloc {
           __typename
@@ -109,6 +109,7 @@ const getProjectById = `
           width
         }
       }
+      slug
     }
   }
 `;
@@ -149,10 +150,11 @@ const fetchGraphQLData = async (
 };
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  const projectId = params.slug;
-  const { project } = await fetchGraphQLData(getProjectById, { id: projectId });
-  const headerData = project.header;
-  const contentData = project.content;
+  const { projects } = await fetchGraphQLData(getProjectById, {
+    slug: params.slug,
+  });
+  const headerData = projects[0].header;
+  const contentData = projects[0].content;
 
   return (
     <main className={styles.projectPage}>
@@ -164,7 +166,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
             return (
-              <OneItemBloc
+              <SoloBloc
                 key={bloc.id}
                 desktopMediaUrl={bloc.desktopMedia.url}
                 id={bloc.id}
@@ -173,7 +175,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 width={bloc.desktopMedia.width}
               >
                 <p>{bloc.text}</p>
-              </OneItemBloc>
+              </SoloBloc>
             );
           case "TextBloc":
             return <TextBloc key={bloc.id} {...bloc} />;
