@@ -130,7 +130,7 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
   const { __typename } = project;
 
   if (__typename === "SoloProject") {
-    const { hashtag, id, media, title, slug } = project;
+    const { hashtag, id, media, slug, title } = project;
 
     return (
       <OneItemBloc

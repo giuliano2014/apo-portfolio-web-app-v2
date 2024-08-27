@@ -27,7 +27,7 @@ const TwoItemsBlock = ({
           url,
           index //@TODO: Improve this code
         ) => (
-          <Link href={`/projects/${slugs[index]}`} key={ids[index]}>
+          <Link key={ids[index]} href={`/projects/${slugs[index]}`}>
             <Card
               key={ids[index]}
               hashtag={hashtags[index]}

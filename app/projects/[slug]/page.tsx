@@ -1,5 +1,5 @@
 import DuoBloc from "@/components/duoBloc/duoBloc";
-import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
+import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
@@ -9,7 +9,6 @@ import styles from "./page.module.css";
 const getProjectById = `
   query GetProjectByID($slug: String!) {
     projects(where: {slug: $slug}) {
-      slug
       content {
         ... on DuoBloc {
           __typename
@@ -110,6 +109,7 @@ const getProjectById = `
           width
         }
       }
+      slug
     }
   }
 `;
@@ -150,9 +150,9 @@ const fetchGraphQLData = async (
 };
 
 const Page = async ({ params }: { params: { slug: string } }) => {
-  console.log('WTHEDUCK!!!', params.slug);
-  const projectId = params.slug;
-  const { projects } = await fetchGraphQLData(getProjectById, { slug: projectId });
+  const { projects } = await fetchGraphQLData(getProjectById, {
+    slug: params.slug,
+  });
   const headerData = projects[0].header;
   const contentData = projects[0].content;
 
@@ -166,17 +166,16 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
             return (
-              <OneItemBloc
+              <SoloBloc
                 key={bloc.id}
                 desktopMediaUrl={bloc.desktopMedia.url}
                 id={bloc.id}
                 height={bloc.desktopMedia.height}
                 mobileMediaUrl={bloc.mobileMedia?.url}
                 width={bloc.desktopMedia.width}
-                slug={projectId}
               >
                 <p>{bloc.text}</p>
-              </OneItemBloc>
+              </SoloBloc>
             );
           case "TextBloc":
             return <TextBloc key={bloc.id} {...bloc} />;
