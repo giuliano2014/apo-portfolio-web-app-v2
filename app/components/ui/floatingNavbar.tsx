@@ -22,17 +22,23 @@ const FloatingNavbar = ({
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
 
+  // Provide from https://ui.aceternity.com/components/floating-navbar
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    const direction = current - scrollYProgress.getPrevious()!;
-    setVisible(direction < 0);
+    // Always display at the top or at the end of the page
+    if (scrollYProgress.get() === 0 || current === 1) {
+      setVisible(true);
+    } else {
+      // Determines displaying based on scroll direction
+      setVisible(current! - scrollYProgress.getPrevious()! < 0);
+    }
   });
-
+  
   return (
     <AnimatePresence mode="wait">
       <motion.div
         initial={{
           opacity: 1,
-          y: -100,
+          y: 0,
         }}
         animate={{
           y: visible ? 0 : -100,
@@ -46,7 +52,7 @@ const FloatingNavbar = ({
           className
         )}
       >
-        <p>Apolline Pellion</p>
+        <Link href="/">Apolline Pellion</Link>
         <div className="flex gap-4">
           {navbarItems.map((navItem: any, idx: number) => (
             <Link
@@ -58,13 +64,6 @@ const FloatingNavbar = ({
             </Link>
           ))}
         </div>
-        {/* <button
-          className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
-          onClick={() => alert("Clicked!!!")}
-        >
-          <span>Contact</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button> */}
       </motion.div>
     </AnimatePresence>
   );
