@@ -32,7 +32,7 @@ const FloatingNavbar = ({
       setVisible(current! - scrollYProgress.getPrevious()! < 0);
     }
   });
-  
+
   return (
     <AnimatePresence mode="wait">
       <motion.div

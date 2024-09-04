@@ -134,6 +134,7 @@ const fetchGraphQLData = async (
         Authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHQL_API_KEY}`,
       },
       body: JSON.stringify({ query, variables }),
+      cache: "no-store",
     });
 
     const { data, errors } = await response.json();
