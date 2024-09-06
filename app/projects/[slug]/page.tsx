@@ -3,7 +3,7 @@ import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
-import TextLines from "@/components/ui/textLines/TextLines";
+import TextLines from "@/components/ui/TextLines";
 import styles from "./page.module.css";
 
 // lib/queries.js
@@ -167,17 +167,17 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           case "DuoBloc":
             return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
+            const { desktopMedia, id, mobileMedia, text } = bloc;
             return (
               <SoloBloc
-                key={bloc.id}
-                desktopMediaUrl={bloc.desktopMedia.url}
-                id={bloc.id}
-                height={bloc.desktopMedia.height}
-                mobileMediaUrl={bloc.mobileMedia?.url}
-                width={bloc.desktopMedia.width}
+                key={id}
+                desktopMediaUrl={desktopMedia.url}
+                id={id}
+                height={desktopMedia.height}
+                mobileMediaUrl={mobileMedia?.url}
+                width={desktopMedia.width}
               >
-                <p>{bloc.text}</p>
-                <TextLines text={bloc.text} />
+                <TextLines text={text} />
               </SoloBloc>
             );
           case "TextBloc":
