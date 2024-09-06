@@ -166,6 +166,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           case "DuoBloc":
             return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
+            const formattedText = bloc.text.replace(/\n/g, "<br />");
             return (
               <SoloBloc
                 key={bloc.id}
@@ -176,6 +177,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 width={bloc.desktopMedia.width}
               >
                 <p>{bloc.text}</p>
+                <div dangerouslySetInnerHTML={{ __html: formattedText }} />
               </SoloBloc>
             );
           case "TextBloc":
