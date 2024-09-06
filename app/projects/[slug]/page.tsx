@@ -3,6 +3,7 @@ import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
+import TextLines from "@/components/ui/textLines/TextLines";
 import styles from "./page.module.css";
 
 // lib/queries.js
@@ -166,7 +167,6 @@ const Page = async ({ params }: { params: { slug: string } }) => {
           case "DuoBloc":
             return <DuoBloc key={bloc.id} {...bloc} />;
           case "SoloBloc":
-            const formattedText = bloc.text.replace(/\n/g, "<br />");
             return (
               <SoloBloc
                 key={bloc.id}
@@ -177,7 +177,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 width={bloc.desktopMedia.width}
               >
                 <p>{bloc.text}</p>
-                <div dangerouslySetInnerHTML={{ __html: formattedText }} />
+                <TextLines text={bloc.text} />
               </SoloBloc>
             );
           case "TextBloc":

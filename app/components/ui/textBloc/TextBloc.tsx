@@ -1,3 +1,4 @@
+import TextLines from "@/components/ui/textLines/TextLines";
 import styles from "./textBloc.module.css";
 
 type TextBlocProps = {
@@ -7,15 +8,12 @@ type TextBlocProps = {
 };
 
 const TextBloc = ({ surtitle, text, title }: TextBlocProps) => {
-  const formattedText = text?.replace(/\n/g, "<br />");
   return (
     <div className={styles.wrapper}>
       <p>{surtitle}</p>
       <p>{title}</p>
       <p>{text}</p>
-      {formattedText && (
-        <div dangerouslySetInnerHTML={{ __html: formattedText }} />
-      )}
+      {text && <TextLines text={text} />}
     </div>
   );
 };
