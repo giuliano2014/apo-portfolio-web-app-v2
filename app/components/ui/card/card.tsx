@@ -1,3 +1,4 @@
+import VideoPlayer from "@/components/ui/VideoPlayer";
 import Image from "next/image";
 import { ReactNode } from "react";
 import styles from "./card.module.css";
@@ -6,7 +7,8 @@ type CardsProps = {
   children?: ReactNode;
   hashtag?: string;
   height: number;
-  isSpecial?: boolean; //@TODO: Rename this prop
+  isSpecial?: boolean; // @TODO: Rename this property
+  mimeType?: string;
   title?: string;
   url: string;
   width: number;
@@ -17,6 +19,7 @@ const Card = ({
   hashtag,
   height,
   isSpecial = false,
+  mimeType,
   title,
   url,
   width,
@@ -24,13 +27,17 @@ const Card = ({
   return (
     <div className={styles.wrapper}>
       <div className={`${styles.box} ${isSpecial ? styles.specialCard : ""}`}>
-        <Image
-          alt="Picture of the author"
-          className={styles.image}
-          height={height}
-          src={url}
-          width={width}
-        />
+        {mimeType === "video/mp4" ? (
+          <VideoPlayer src={url} />
+        ) : (
+          <Image
+            alt={title ?? ""}
+            className={styles.image}
+            height={height}
+            src={url}
+            width={width}
+          />
+        )}
         {title && <h2 className={styles.title}>{title}</h2>}
         {hashtag && <p className={styles.hashtag}>#{hashtag}</p>}
       </div>

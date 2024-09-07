@@ -2,7 +2,16 @@ import Card from "@/components/ui/card/card";
 import Link from "next/link";
 import styles from "./twoItemsBlock.module.css";
 
-//@TODOD: Add types
+type TwoItemsBlockProps = {
+  hashtags: string[];
+  heights: number[];
+  ids: string[];
+  slugs: string[];
+  titles: string[];
+  urls: string[];
+  widths: number[];
+};
+
 const TwoItemsBlock = ({
   hashtags,
   heights,
@@ -11,21 +20,13 @@ const TwoItemsBlock = ({
   titles,
   urls,
   widths,
-}: {
-  hashtags: string[];
-  heights: number[];
-  ids: string[];
-  slugs: string[];
-  titles: string[];
-  urls: string[];
-  widths: number[];
-}) => {
+}: TwoItemsBlockProps) => {
   return (
     <div className={styles.wrapper}>
       {urls.map(
         (
           url,
-          index //@TODO: Improve this code
+          index // @TODO: Improve this code
         ) => (
           <Link key={ids[index]} href={`/projects/${slugs[index]}`}>
             <Card

@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/utils/cn";
 import {
   AnimatePresence,
@@ -9,16 +10,17 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 
-const FloatingNavbar = ({
-  navbarItems,
-  className,
-}: {
-  navbarItems: {
-    name: string;
-    link: string;
-  }[];
+type NavbarItem = {
+  link: string;
+  name: string;
+};
+
+type FloatingNavbarProps = {
   className?: string;
-}) => {
+  navbarItems: NavbarItem[];
+};
+
+const FloatingNavbar = ({ navbarItems, className }: FloatingNavbarProps) => {
   const { scrollYProgress } = useScroll();
   const [visible, setVisible] = useState(true);
 
@@ -52,13 +54,13 @@ const FloatingNavbar = ({
           className
         )}
       >
-        <Link href="/">Apolline Pellion</Link>
+        <Link className="text-neutral-600 hover:text-neutral-500" href="/">Apolline Pellion</Link>
         <div className="flex gap-4">
-          {navbarItems.map((navItem: any, idx: number) => (
+          {navbarItems.map((navItem: NavbarItem, idx: number) => (
             <Link
-              key={`link=${idx}`}
+              className="relative items-center flex space-x-1 text-neutral-600 hover:text-neutral-500"
               href={navItem.link}
-              className="relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+              key={`link=${idx}`}
             >
               <span className="sm:block text-sm">{navItem.name}</span>
             </Link>

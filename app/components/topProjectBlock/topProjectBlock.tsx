@@ -6,6 +6,7 @@ import ThreeColumnsText from "@/components/ui/threeColumnsText/ThreeColumnsText"
 import useIsDesktop from "@/hooks/useIsDesktop";
 import styles from "./topProjectBlock.module.css";
 
+// @TODO: Add types
 const TopProjectBlock = ({
   brand,
   description,

@@ -18,6 +18,7 @@ const getProjectById = `
             id
             media {
               height
+              mimeType
               url
               width
             }
@@ -28,6 +29,7 @@ const getProjectById = `
             text
             media {
               height
+              mimeType
               url
               width
             }
@@ -39,11 +41,13 @@ const getProjectById = `
           text
           desktopMedia {
             height
+            mimeType
             url
             width
           }
           mobileMedia {
             height
+            mimeType
             url
             width
           }
@@ -62,6 +66,7 @@ const getProjectById = `
             id
             media {
               height
+              mimeType
               url
               width
             }
@@ -72,6 +77,7 @@ const getProjectById = `
             text
             media {
               height
+              mimeType
               url
               width
             }
@@ -81,6 +87,7 @@ const getProjectById = `
             text
             media {
               height
+              mimeType
               url
               width
             }
@@ -174,6 +181,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 desktopMediaUrl={desktopMedia.url}
                 id={id}
                 height={desktopMedia.height}
+                mimeType={desktopMedia.mimeType}
                 mobileMediaUrl={mobileMedia?.url}
                 width={desktopMedia.width}
               >
