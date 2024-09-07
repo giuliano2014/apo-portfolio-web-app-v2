@@ -1,4 +1,4 @@
-import VideoPlayer from "@/components/ui/VideoPlayer";
+import VideoPlayer from "@/components/ui/videoPlayer/VideoPlayer";
 import Image from "next/image";
 import { ReactNode } from "react";
 import styles from "./card.module.css";
