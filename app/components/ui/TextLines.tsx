@@ -1,9 +1,16 @@
-const TextLines = ({ text }: { text: string } ): JSX.Element => {
+const TextLines = ({ text }: { text: string }): JSX.Element => {
+  const symbol = "\n";
+  const hasLineBreaks = text.includes(symbol);
+
   return (
     <>
-      {text.split("\n").map((line: string, index: number) => (
-        <p key={index}>{line}</p>
-      ))}
+      {hasLineBreaks ? (
+        text
+          .split(symbol)
+          .map((line: string, index: number) => <p key={index}>{line}</p>)
+      ) : (
+        <p>{text}</p>
+      )}
     </>
   );
 };
