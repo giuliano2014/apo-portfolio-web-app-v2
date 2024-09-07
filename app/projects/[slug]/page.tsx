@@ -177,7 +177,7 @@ const Page = async ({ params }: { params: { slug: string } }) => {
                 mobileMediaUrl={mobileMedia?.url}
                 width={desktopMedia.width}
               >
-                <TextLines text={text} />
+                {text && <TextLines text={text} />}
               </SoloBloc>
             );
           case "TextBloc":
