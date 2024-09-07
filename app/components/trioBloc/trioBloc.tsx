@@ -1,7 +1,7 @@
 import Card from "@/components/ui/card/card";
 import styles from "./trioBloc.module.css";
 
-//@TODO: Add types
+// @TODO: Add types
 const TrioBloc = ({
   firstColumn,
   secondColumn,
@@ -16,6 +16,7 @@ const TrioBloc = ({
       <Card
         key={firstColumn.id}
         height={firstColumn.media.height}
+        mimeType={firstColumn.media.mimeType}
         url={firstColumn.media.url}
         width={firstColumn.media.width}
       >
@@ -24,6 +25,7 @@ const TrioBloc = ({
       <Card
         key={secondColumn.id}
         height={secondColumn.media.height}
+        mimeType={secondColumn.media.mimeType}
         url={secondColumn.media.url}
         width={secondColumn.media.width}
       >
@@ -32,6 +34,7 @@ const TrioBloc = ({
       <Card
         key={thirdColumn.id}
         height={thirdColumn.media.height}
+        mimeType={thirdColumn.media.mimeType}
         url={thirdColumn.media.url}
         width={thirdColumn.media.width}
       >

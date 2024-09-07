@@ -1,7 +1,7 @@
 import Card from "@/components/ui/card/card";
 import styles from "./duoBloc.module.css";
 
-//@TODOD: Add types
+// @TODO: Add types
 const duoBloc = ({
   firstColumn,
   secondColumn,
@@ -15,6 +15,7 @@ const duoBloc = ({
       <Card
         key={firstColumn.id}
         height={firstColumn.media.height}
+        mimeType={firstColumn.media.mimeType}
         url={firstColumn.media.url}
         width={firstColumn.media.width}
       >
@@ -23,6 +24,7 @@ const duoBloc = ({
       <Card
         key={secondColumn.id}
         height={secondColumn.media.height}
+        mimeType={secondColumn.media.mimeType}
         url={secondColumn.media.url}
         width={secondColumn.media.width}
       >
