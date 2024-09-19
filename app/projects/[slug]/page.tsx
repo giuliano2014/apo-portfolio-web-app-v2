@@ -2,6 +2,7 @@ import DuoBloc from "@/components/duoBloc/duoBloc";
 import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
+import RemoteVideoPlayer from "@/components/ui/remoteVideoPlayer/RemoteVideoPlayer";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
 import TextLines from "@/components/ui/TextLines";
 import styles from "./page.module.css";
@@ -92,6 +93,14 @@ const getProjectById = `
               width
             }
           }
+        }
+        ... on VideoBloc {
+          __typename
+          id
+          poster {
+            url
+          }
+          url
         }
       }
       header {
@@ -192,6 +201,14 @@ const Page = async ({ params }: { params: { slug: string } }) => {
             return <TextBloc key={bloc.id} {...bloc} />;
           case "TrioBloc":
             return <TrioBloc key={bloc.id} {...bloc} />;
+          case "VideoBloc":
+            return (
+              <RemoteVideoPlayer
+                key={bloc.id}
+                poster={bloc.poster.url}
+                url={bloc.url}
+              />
+            );
           default:
             return null;
         }
