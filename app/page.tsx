@@ -43,7 +43,7 @@ type HomePageData = {
 const getHomePageData = `
   query GetHomePageData {
     homepages {
-      projects {
+      projects(first: 100) {
         ... on SoloProject {
           __typename
           hashtag

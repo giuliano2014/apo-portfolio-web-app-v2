@@ -11,7 +11,7 @@ import styles from "./page.module.css";
 const getProjectById = `
   query GetProjectByID($slug: String!) {
     projects(where: {slug: $slug}) {
-      content {
+      content(first: 100) {
         ... on DuoBloc {
           __typename
           id
