@@ -1,4 +1,4 @@
-import TextLines from "@/components/ui/TextLines";
+import TextLines from "@/components/ui/textLines/TextLines";
 import styles from "./textBloc.module.css";
 
 type TextBlocProps = {
@@ -10,8 +10,8 @@ type TextBlocProps = {
 const TextBloc = ({ surtitle, text, title }: TextBlocProps) => {
   return (
     <div className={styles.wrapper}>
-      <h2>{surtitle}</h2>
-      <h3>{title}</h3>
+      <h2 className={styles.surtitle}>{surtitle}</h2>
+      <h3 className={styles.title}>{title}</h3>
       {text && <TextLines text={text} />}
     </div>
   );

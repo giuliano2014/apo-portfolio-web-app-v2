@@ -9,6 +9,7 @@ import {
 } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
+import styles from "./floatingNavbar.module.css";
 
 type NavbarItem = {
   link: string;
@@ -54,11 +55,13 @@ const FloatingNavbar = ({ navbarItems, className }: FloatingNavbarProps) => {
           className
         )}
       >
-        <Link className="text-neutral-600 hover:text-neutral-500" href="/">Apolline Pellion</Link>
+        <Link className={`hover:text-neutral-500 ${styles.link}`} href="/">
+          Apolline Pellion
+        </Link>
         <div className="flex gap-4">
           {navbarItems.map((navItem: NavbarItem, idx: number) => (
             <Link
-              className="relative items-center flex space-x-1 text-neutral-600 hover:text-neutral-500"
+              className={`relative items-center flex space-x-1 hover:text-neutral-500 ${styles.link}`}
               href={navItem.link}
               key={`link=${idx}`}
             >

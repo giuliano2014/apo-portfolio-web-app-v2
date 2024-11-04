@@ -2,4 +2,16 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
+
+  .label {
+    color: var(--font-color-grey-light);
+    font-family: var(--font-questrial);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .text {
+    font-family: var(--font-questrial);
+    letter-spacing: 0.2px;
+  }
 }

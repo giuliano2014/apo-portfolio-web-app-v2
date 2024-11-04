@@ -1,4 +1,4 @@
-import TextLines from "@/components/ui/TextLines";
+import TextLines from "@/components/ui/textLines/TextLines";
 import styles from "./descriptionBlock.module.css";
 
 type DescriptionBlockProps = {
@@ -8,7 +8,7 @@ type DescriptionBlockProps = {
 const DescriptionBlock = ({ description }: DescriptionBlockProps) => {
   return (
     <div className={styles.wrapper}>
-      <p>Description</p>
+      <p className={styles.label}>Description</p>
       <TextLines text={description} />
     </div>
   );

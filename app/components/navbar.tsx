@@ -1,4 +1,4 @@
-import FloatingNavbar from "@/components/ui/floatingNavbar";
+import FloatingNavbar from "@/components/ui/floatingNavbar/FloatingNavbar";
 
 const Navbar = () => {
   const navbarItems = [
