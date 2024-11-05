@@ -4,7 +4,7 @@ import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import RemoteVideoPlayer from "@/components/ui/remoteVideoPlayer/RemoteVideoPlayer";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
-import TextLines from "@/components/ui/TextLines";
+import TextLines from "@/components/ui/textLines/TextLines";
 import styles from "./page.module.css";
 
 // lib/queries.js

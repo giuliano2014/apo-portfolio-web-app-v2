@@ -7,21 +7,21 @@ type ThreeColumnsTextProps = {
 };
 
 const ThreeColumnsText = ({ brand, tools, year }: ThreeColumnsTextProps) => {
-  const formattedTools = tools.map(tool => `${tool}. `).join('');
+  const formattedTools = tools.map((tool) => `${tool}. `).join("");
 
   return (
     <div className={styles.wrapper}>
       <div>
-        <p>Marque</p>
-        <h2>{brand}</h2>
+        <p className={styles.label}>Marque</p>
+        <h2 className={styles.text}>{brand}</h2>
       </div>
       <div>
-        <p>Année</p>
-        <h2>{year}</h2>
+        <p className={styles.label}>Année</p>
+        <h2 className={styles.text}>{year}</h2>
       </div>
       <div>
-        <p>Outils</p>
-        <h2>{formattedTools}</h2>
+        <p className={styles.label}>Outils</p>
+        <h2 className={styles.text}>{formattedTools}</h2>
       </div>
     </div>
   );
