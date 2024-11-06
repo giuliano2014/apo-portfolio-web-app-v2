@@ -167,9 +167,9 @@ const fetchGraphQLData = async (
   }
 };
 
-const Page = async ({ params }: { params: { slug: string } }) => {
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { projects } = await fetchGraphQLData(getProjectById, {
-    slug: params.slug,
+    slug: (await params).slug,
   });
   const headerData = projects[0].header;
   const contentData = projects[0].content;
