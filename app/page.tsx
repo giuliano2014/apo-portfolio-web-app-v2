@@ -1,5 +1,7 @@
 import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
+import { gql } from "@apollo/client";
+import { getClient } from "@/lib/apollo-client";
 import styles from "./page.module.css";
 
 enum Hashtag {
@@ -39,8 +41,7 @@ type HomePageData = {
   }[];
 };
 
-// lib/queries.js
-const getHomePageData = `
+const GET_HOME_PAGE_DATA = gql`
   query GetHomePageData {
     homepages {
       projects(first: 100) {
@@ -87,42 +88,6 @@ const getHomePageData = `
   }
 `;
 
-// lib/graphql.js
-const endpoint: string | undefined = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-
-if (!endpoint) {
-  throw new Error("GraphQL endpoint is not defined in environment variables.");
-}
-
-// @TODO: Move this function to a shared file
-const fetchGraphQLData = async (
-  query: string,
-  variables: Record<string, any> = {}
-): Promise<HomePageData> => {
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHQL_API_KEY}`,
-      },
-      body: JSON.stringify({ query, variables }),
-      cache: "no-store",
-    });
-
-    const { data, errors } = await response.json();
-
-    if (errors) {
-      throw new Error(errors.map((error: any) => error.message).join(", "));
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching GraphQL data:", error);
-    throw error;
-  }
-};
-
 type ProjectRendererProps = {
   project: Project;
 };
@@ -164,7 +129,10 @@ const ProjectRenderer = ({ project }: ProjectRendererProps) => {
 };
 
 const Home = async () => {
-  const data = await fetchGraphQLData(getHomePageData);
+  const client = getClient();
+  const { data } = await client.query<HomePageData>({
+    query: GET_HOME_PAGE_DATA,
+  });
   const projects = data.homepages[0].projects;
 
   return (

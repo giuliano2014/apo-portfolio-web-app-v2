@@ -5,12 +5,13 @@ import TrioBloc from "@/components/trioBloc/trioBloc";
 import RemoteVideoPlayer from "@/components/ui/remoteVideoPlayer/RemoteVideoPlayer";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
 import TextLines from "@/components/ui/textLines/TextLines";
+import { getClient } from "@/lib/apollo-client";
+import { gql } from "@apollo/client";
 import styles from "./page.module.css";
 
-// lib/queries.js
-const getProjectById = `
+const GET_PROJECT_BY_ID = gql`
   query GetProjectByID($slug: String!) {
-    projects(where: {slug: $slug}) {
+    projects(where: { slug: $slug }) {
       content(first: 100) {
         ... on DuoBloc {
           __typename
@@ -131,48 +132,16 @@ const getProjectById = `
   }
 `;
 
-// lib/graphql.js
-const endpoint: string | undefined = process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-
-if (!endpoint) {
-  throw new Error("GraphQL endpoint is not defined in environment variables.");
-}
-
-// @TODO: Move this function to a shared file
-const fetchGraphQLData = async (
-  query: string,
-  variables: Record<string, any> = {}
-): Promise<any> => {
-  try {
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHQL_API_KEY}`,
-      },
-      body: JSON.stringify({ query, variables }),
-      cache: "no-store",
-    });
-
-    const { data, errors } = await response.json();
-
-    if (errors) {
-      throw new Error(errors.map((error: any) => error.message).join(", "));
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Error fetching GraphQL data:", error);
-    throw error;
-  }
-};
-
-const Page = async ({ params }: { params: { slug: string } }) => {
-  const { projects } = await fetchGraphQLData(getProjectById, {
-    slug: params.slug,
+const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const client = getClient();
+  const { data } = await client.query({
+    // @TODO: Add types
+    query: GET_PROJECT_BY_ID,
+    variables: { slug: (await params).slug },
   });
-  const headerData = projects[0].header;
-  const contentData = projects[0].content;
+
+  const headerData = data.projects[0].header;
+  const contentData = data.projects[0].content;
 
   return (
     <main className={styles.projectPage}>
