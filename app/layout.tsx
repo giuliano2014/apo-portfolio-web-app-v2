@@ -1,3 +1,4 @@
+// import Header from "@/components/header/Header";
 import Header from "@/components/header/Header";
 import type { Metadata } from "next";
 import { Questrial, Syne } from "next/font/google";
