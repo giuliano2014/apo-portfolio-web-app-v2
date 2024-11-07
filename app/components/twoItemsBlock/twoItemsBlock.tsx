@@ -1,4 +1,4 @@
-import Card from "@/components/ui/card/card";
+import Card from "@/components/ui/card/Card";
 import Link from "next/link";
 import styles from "./twoItemsBlock.module.css";
 

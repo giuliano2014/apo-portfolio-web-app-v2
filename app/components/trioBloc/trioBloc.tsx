@@ -1,4 +1,4 @@
-import Card from "@/components/ui/card/card";
+import Card from "@/components/ui/card/Card";
 import styles from "./trioBloc.module.css";
 
 // @TODO: Add types
