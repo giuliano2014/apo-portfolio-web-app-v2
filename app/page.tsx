@@ -1,7 +1,7 @@
 import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import { gql } from "@apollo/client";
-import { getClient } from "./lib/apollo-client";
+import { getClient } from "@/lib/apollo-client";
 import styles from "./page.module.css";
 
 enum Hashtag {
