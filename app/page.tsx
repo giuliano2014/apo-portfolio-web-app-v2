@@ -1,4 +1,4 @@
-import OneItemBloc from "@/components/oneItemBloc/oneItemBloc";
+import OneItemBloc from "@/components/oneItemBloc/OneItemBloc";
 import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
 import { gql } from "@apollo/client";
 import { getClient } from "@/lib/apollo-client";
