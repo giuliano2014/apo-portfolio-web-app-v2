@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/ui/card/card";
+import Card from "@/components/ui/card/Card";
 import DescriptionBlock from "@/components/ui/descriptionBlock/DescriptionBlock";
 import ThreeColumnsText from "@/components/ui/threeColumnsText/ThreeColumnsText";
 import useIsDesktop from "@/hooks/useIsDesktop";

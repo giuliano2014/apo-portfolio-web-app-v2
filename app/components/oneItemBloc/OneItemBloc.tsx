@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/ui/card/card";
+import Card from "@/components/ui/card/Card";
 import useIsDesktop from "@/hooks/useIsDesktop";
 import Link from "next/link";
 import { ReactNode } from "react";
