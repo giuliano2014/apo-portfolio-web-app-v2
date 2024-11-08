@@ -1,6 +1,6 @@
 import DuoBloc from "@/components/duoBloc/DuoBloc";
 import SoloBloc from "@/components/soloBloc/SoloBloc";
-import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
+import TopProjectBlock from "@/components/topProjectBlock/TopProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";
 import RemoteVideoPlayer from "@/components/ui/remoteVideoPlayer/RemoteVideoPlayer";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
