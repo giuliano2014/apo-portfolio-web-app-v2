@@ -1,5 +1,5 @@
 import OneItemBloc from "@/components/oneItemBloc/OneItemBloc";
-import TwoItemsBlock from "@/components/twoItemsBlock/twoItemsBlock";
+import TwoItemsBlock from "@/components/twoItemsBlock/TwoItemsBlock";
 import { gql } from "@apollo/client";
 import { getClient } from "@/lib/apollo-client";
 import styles from "./page.module.css";
