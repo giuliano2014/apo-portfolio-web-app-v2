@@ -1,4 +1,4 @@
-import DuoBloc from "@/components/duoBloc/duoBloc";
+import DuoBloc from "@/components/duoBloc/DuoBloc";
 import SoloBloc from "@/components/soloBloc/soloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/topProjectBlock";
 import TrioBloc from "@/components/trioBloc/trioBloc";

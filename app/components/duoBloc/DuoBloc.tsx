@@ -2,7 +2,7 @@ import Card from "@/components/ui/card/card";
 import styles from "./duoBloc.module.css";
 
 // @TODO: Add types
-const duoBloc = ({
+const DuoBloc = ({
   firstColumn,
   secondColumn,
 }: {
@@ -34,4 +34,4 @@ const duoBloc = ({
   );
 };
 
-export default duoBloc;
+export default DuoBloc;
