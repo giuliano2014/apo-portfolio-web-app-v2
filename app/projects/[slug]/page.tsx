@@ -2,7 +2,7 @@ import DuoBloc from "@/components/duoBloc/DuoBloc";
 import SoloBloc from "@/components/soloBloc/SoloBloc";
 import TopProjectBlock from "@/components/topProjectBlock/TopProjectBlock";
 import TrioBloc from "@/components/trioBloc/TrioBloc";
-import RemoteVideoPlayer from "@/components/ui/remoteVideoPlayer/RemoteVideoPlayer";
+import RemoteVideoPlayer from "@/components/ui/RemoteVideoPlayer";
 import TextBloc from "@/components/ui/textBloc/TextBloc";
 import TextLines from "@/components/ui/textLines/TextLines";
 import { getClient } from "@/lib/apollo-client";
