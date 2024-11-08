@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/ui/card/card";
+import Card from "@/components/ui/card/Card";
 import useIsDesktop from "@/hooks/useIsDesktop";
 import { ReactNode } from "react";
 import styles from "./soloBloc.module.css";
